@@ -4,17 +4,43 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.connection.RabbitResourceHolder;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PublisherTest {
+
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Test
+    public void testSpringAMQPSend(){
+
+        String queueName = "simple.queue";
+
+        Object message = "hello,springamqp!!!";
+        rabbitTemplate.convertAndSend(queueName,message);
+
+
+
+    }
+
     @Test
     public void testSendMessage() throws IOException, TimeoutException {
         // 1.建立连接
         ConnectionFactory factory = new ConnectionFactory();
         // 1.1.设置连接参数，分别是：主机名、端口号、vhost、用户名、密码
-        factory.setHost("192.168.150.101");
+        factory.setHost("192.168.200.130");
         factory.setPort(5672);
         factory.setVirtualHost("/");
         factory.setUsername("itcast");
