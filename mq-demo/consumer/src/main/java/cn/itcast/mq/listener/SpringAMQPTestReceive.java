@@ -1,5 +1,10 @@
 package cn.itcast.mq.listener;
 
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+import org.springframework.amqp.core.ExchangeTypes;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -32,16 +37,28 @@ public class SpringAMQPTestReceive {
 //
 //    }
 
+//
+//    @RabbitListener(queues = "queue01")
+//    public void getQ01(String msg01){
+//        System.out.println("queue01 >> "+msg01);
+//    }
+//
+//    @RabbitListener(queues = "queue02")
+//    public void getQ02(String msg02){
+//        System.out.println("queue02 >> "+msg02);
+//    }
 
-    @RabbitListener(queues = "queue01")
-    public void getQ01(String msg01){
-        System.out.println("queue01 >> "+msg01);
+
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(name = "queue01"),
+            exchange = @Exchange(name = "directExchange",type = ExchangeTypes.DIRECT),key = {"red","blue"}))
+    public void queue01(String msg01){
+        System.out.println("RB queue01 >> "+msg01);
     }
 
-    @RabbitListener(queues = "queue02")
-    public void getQ02(String msg02){
-        System.out.println("queue02 >> "+msg02);
+    @RabbitListener(bindings = @QueueBinding(value = @Queue("queue02"),
+    exchange = @Exchange(name = "directExchange",type = ExchangeTypes.DIRECT),key = {"red","yellow"}))
+    public void queue02(String msg02){
+        System.out.println("RY queue02 >> "+msg02);
     }
-
 
 }

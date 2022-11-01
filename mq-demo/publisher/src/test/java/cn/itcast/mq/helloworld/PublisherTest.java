@@ -25,6 +25,17 @@ public class PublisherTest {
     private RabbitTemplate rabbitTemplate;
 
     @Test
+    public void testPublishSubscribeDirect(){
+
+        String fanoutExchange = "directExchange";
+
+        String message = "hello,directExchange... red!red!!blue!!!";
+        rabbitTemplate.convertAndSend(fanoutExchange,"blue",message);
+
+
+    }
+
+    @Test
     public void testPublishSubscribe(){
 
         String fanoutExchange = "fanoutExchange";
