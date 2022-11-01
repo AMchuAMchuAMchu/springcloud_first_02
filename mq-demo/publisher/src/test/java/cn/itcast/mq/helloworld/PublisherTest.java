@@ -25,6 +25,17 @@ public class PublisherTest {
     private RabbitTemplate rabbitTemplate;
 
     @Test
+    public void testPublishSubscribe(){
+
+        String fanoutExchange = "fanoutExchange";
+
+        String message = "hello,fanoutExchange...";
+        rabbitTemplate.convertAndSend(fanoutExchange,"",message);
+
+
+    }
+
+    @Test
     public void testSpringAMQPSend() throws InterruptedException {
 
         String queueName = "simple.queue";

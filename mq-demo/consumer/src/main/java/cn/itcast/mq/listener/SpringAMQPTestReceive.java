@@ -33,4 +33,15 @@ public class SpringAMQPTestReceive {
     }
 
 
+    @RabbitListener(queues = "queue01")
+    public void getQ01(String msg01){
+        System.out.println("queue01 >> "+msg01);
+    }
+
+    @RabbitListener(queues = "queue02")
+    public void getQ02(String msg02){
+        System.out.println("queue02 >> "+msg02);
+    }
+
+
 }
