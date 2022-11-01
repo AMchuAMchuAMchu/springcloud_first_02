@@ -32,7 +32,7 @@ public class CFFanoutConfig {
 
     @Bean
     public FanoutExchange fanoutExchange() {
-        return new FanoutExchange("itcast.fanout");
+        return new FanoutExchange("fanoutExchange");
     }
 
     @Bean
