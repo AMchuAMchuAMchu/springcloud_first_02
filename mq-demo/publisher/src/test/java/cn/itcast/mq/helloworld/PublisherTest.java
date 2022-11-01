@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 
@@ -24,13 +25,18 @@ public class PublisherTest {
     private RabbitTemplate rabbitTemplate;
 
     @Test
-    public void testSpringAMQPSend(){
+    public void testSpringAMQPSend() throws InterruptedException {
 
         String queueName = "simple.queue";
 
-        Object message = "hello,springamqp!!!";
-        rabbitTemplate.convertAndSend(queueName,message);
+        String message = "hello,springamqp!!!";
 
+        for (int i = 1; i <= 50; i++) {
+
+            rabbitTemplate.convertAndSend(queueName, message+i);
+            TimeUnit.MILLISECONDS.sleep(20);
+
+        }
 
 
     }

@@ -3,6 +3,8 @@ package cn.itcast.mq.listener;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Description ==> TODO
  * BelongsProject ==> springcloud_first_02
@@ -15,9 +17,18 @@ import org.springframework.stereotype.Component;
 public class SpringAMQPTestReceive {
 
     @RabbitListener(queues = "simple.queue")
-    public void getSQ(String msg){
+    public void getSQ1(String msg1) throws InterruptedException {
 
-        System.out.println("接收到的消息 >> "+msg);
+        System.out.println("消费者一接收到的消息 >> "+msg1);
+        TimeUnit.MILLISECONDS.sleep(20);
+
+    }
+
+    @RabbitListener(queues = "simple.queue")
+    public void getSQ2(String msg2) throws InterruptedException {
+
+        System.out.println("消费者二接收到的消息 >> "+msg2);
+        TimeUnit.MILLISECONDS.sleep(200);
 
     }
 
