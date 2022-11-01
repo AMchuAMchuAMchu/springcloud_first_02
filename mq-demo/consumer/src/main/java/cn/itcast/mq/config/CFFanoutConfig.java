@@ -22,12 +22,12 @@ public class CFFanoutConfig {
 
     @Bean
     public Queue queue01() {
-        return new Queue("fanout.queue01");
+        return new Queue("queue01");
     }
 
     @Bean
     public Queue queue02() {
-        return new Queue("fanout.queue02");
+        return new Queue("queue02");
     }
 
     @Bean
