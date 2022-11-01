@@ -15,22 +15,22 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class SpringAMQPTestReceive {
-
-    @RabbitListener(queues = "simple.queue")
-    public void getSQ1(String msg1) throws InterruptedException {
-
-        System.out.println("消费者一接收到的消息 >> "+msg1);
-        TimeUnit.MILLISECONDS.sleep(20);
-
-    }
-
-    @RabbitListener(queues = "simple.queue")
-    public void getSQ2(String msg2) throws InterruptedException {
-
-        System.out.println("消费者二接收到的消息 >> "+msg2);
-        TimeUnit.MILLISECONDS.sleep(200);
-
-    }
+//
+//    @RabbitListener(queues = "simple.queue")
+//    public void getSQ1(String msg1) throws InterruptedException {
+//
+//        System.out.println("消费者一接收到的消息 >> "+msg1);
+//        TimeUnit.MILLISECONDS.sleep(20);
+//
+//    }
+//
+//    @RabbitListener(queues = "simple.queue")
+//    public void getSQ2(String msg2) throws InterruptedException {
+//
+//        System.out.println("消费者二接收到的消息 >> "+msg2);
+//        TimeUnit.MILLISECONDS.sleep(200);
+//
+//    }
 
 
     @RabbitListener(queues = "queue01")
