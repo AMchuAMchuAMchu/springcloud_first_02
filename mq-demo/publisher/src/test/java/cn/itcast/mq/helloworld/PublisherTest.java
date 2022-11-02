@@ -1,5 +1,6 @@
 package cn.itcast.mq.helloworld;
 
+import cn.itcast.mq.pojo.AnimeInfo;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -22,6 +23,20 @@ public class PublisherTest {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Test
+    public void testObjectTransfer(){
+
+        String fanoutExchange = "topicExchange";
+
+        String message = "hello,china.news";
+        AnimeInfo animeInfo = new AnimeInfo();
+        animeInfo.setName("刀剑神域");
+        animeInfo.setTime(20221106);
+        rabbitTemplate.convertAndSend(fanoutExchange,"china.news",animeInfo);
+
+
+    }
 
     @Test
     public void testPublishSubscribeTopic(){
