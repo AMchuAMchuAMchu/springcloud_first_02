@@ -5,7 +5,6 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.amqp.rabbit.connection.RabbitResourceHolder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,12 +24,22 @@ public class PublisherTest {
     private RabbitTemplate rabbitTemplate;
 
     @Test
+    public void testPublishSubscribeTopic(){
+
+        String fanoutExchange = "topicExchange";
+
+        String message = "hello,Japan.news";
+        rabbitTemplate.convertAndSend(fanoutExchange,"Japan.news",message);
+
+
+    }
+    @Test
     public void testPublishSubscribeDirect(){
 
         String fanoutExchange = "directExchange";
 
         String message = "hello,directExchange... red!red!!blue!!!";
-        rabbitTemplate.convertAndSend(fanoutExchange,"blue",message);
+        rabbitTemplate.convertAndSend(fanoutExchange,"red",message);
 
 
     }

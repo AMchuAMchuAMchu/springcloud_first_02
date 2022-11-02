@@ -48,17 +48,29 @@ public class SpringAMQPTestReceive {
 //        System.out.println("queue02 >> "+msg02);
 //    }
 
-
+//
+//    @RabbitListener(bindings = @QueueBinding(value = @Queue(name = "queue01"),
+//            exchange = @Exchange(name = "directExchange",type = ExchangeTypes.DIRECT),key = {"red","blue"}))
+//    public void queue01(String msg01){
+//        System.out.println("RB queue01 >> "+msg01);
+//    }
+//
+//    @RabbitListener(bindings = @QueueBinding(value = @Queue("queue02"),
+//    exchange = @Exchange(name = "directExchange",type = ExchangeTypes.DIRECT),key = {"red","yellow"}))
+//    public void queue02(String msg02){
+//        System.out.println("RY queue02 >> "+msg02);
+//    }
+//
     @RabbitListener(bindings = @QueueBinding(value = @Queue(name = "queue01"),
-            exchange = @Exchange(name = "directExchange",type = ExchangeTypes.DIRECT),key = {"red","blue"}))
+            exchange = @Exchange(name = "topicExchange",type = ExchangeTypes.TOPIC),key = {"china.#"}))
     public void queue01(String msg01){
-        System.out.println("RB queue01 >> "+msg01);
+        System.out.println("china.# >> "+msg01);
     }
 
     @RabbitListener(bindings = @QueueBinding(value = @Queue("queue02"),
-    exchange = @Exchange(name = "directExchange",type = ExchangeTypes.DIRECT),key = {"red","yellow"}))
+    exchange = @Exchange(name = "topicExchange",type = ExchangeTypes.TOPIC),key = {"#.news"}))
     public void queue02(String msg02){
-        System.out.println("RY queue02 >> "+msg02);
+        System.out.println("#.news >> "+msg02);
     }
 
 }
